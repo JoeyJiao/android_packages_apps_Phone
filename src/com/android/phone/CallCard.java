@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import android.provider.ContactsContract;
+import com.android.phone.location.PhoneLocation;
 
 /**
  * "Call card" UI element: the in-call screen contains a tiled layout of call
@@ -95,6 +96,7 @@ public class CallCard extends FrameLayout
     private TextView mPhoneNumber;
     private TextView mLabel;
     private TextView mCallTypeLabel;
+    private TextView mCity;
     private TextView mSocialStatus;
 
     // Info about the "secondary" call, which is the "call on hold" when
@@ -197,6 +199,7 @@ public class CallCard extends FrameLayout
         mName = (TextView) findViewById(R.id.name);
         mPhoneNumber = (TextView) findViewById(R.id.phoneNumber);
         mLabel = (TextView) findViewById(R.id.label);
+        mCity = (TextView) findViewById(R.id.city);
         mCallTypeLabel = (TextView) findViewById(R.id.callTypeLabel);
         mSocialStatus = (TextView) findViewById(R.id.socialStatus);
         mOrganization = (TextView) findViewById(R.id.organization);
@@ -546,6 +549,7 @@ public class CallCard extends FrameLayout
             mPhoneNumber.setTextColor(getResources().getColor(mRotarySelectorHintColorResId));
             mPhoneNumber.setVisibility(View.VISIBLE);
             mLabel.setVisibility(View.GONE);
+	        mCity.setVisibility(View.GONE);
         }
         // If we don't have a hint to display, just don't touch
         // mPhoneNumber and mLabel. (Their text / color / visibility have
@@ -1126,6 +1130,11 @@ public class CallCard extends FrameLayout
                     displayNumber = number;
                 } else {
                     displayName = number;
+                    String city=PhoneLocation.getCityFromPhone(number);
+                    if(city!=null){
+                    	mCity.setText(city);
+                    	mCity.setVisibility(View.VISIBLE);
+                    }
                 }
             } else {
                 // We do have a valid "name" in the CallerInfo.  Display that
@@ -1295,6 +1304,7 @@ public class CallCard extends FrameLayout
         // But for now, just hide it:
         mPhoneNumber.setVisibility(View.GONE);
         mLabel.setVisibility(View.GONE);
+		mCity.setVisibility(View.GONE);
 
         // Other text fields:
         updateCallTypeLabel(call);

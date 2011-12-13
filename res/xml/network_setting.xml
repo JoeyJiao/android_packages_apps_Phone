@@ -54,6 +54,16 @@
         android:entryValues="@array/preferred_network_mode_values"
         android:dialogTitle="@string/preferred_network_mode_dialogtitle" />
 
+    <PreferenceScreen 
+    	android:persistent="false" 
+    	android:title="@string/apn_settings" 
+    	android:key="button_apn_key">
+        <intent 
+        	android:targetPackage="com.android.settings"
+        	android:action="android.intent.action.MAIN" 
+        	android:targetClass="com.android.settings.ApnSettings" />
+    </PreferenceScreen>
+
     <ListPreference
         android:key="preferred_umts_network_mode_key"
         android:title="@string/gsm_umts_network_preferences_title"
