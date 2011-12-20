@@ -1704,10 +1704,7 @@ public class CallNotifier extends Handler
                             (uSignalType, uAlertPitch, uSignal);
 
                     //Create the SignalInfo tone player and pass the ToneID
-                    if(!((SignalToneUtil.IS95_CONST_IR_SIGNAL_IS54B == uSignalType)
-                      && (SignalToneUtil.IS95_CONST_IR_SIG_ISDN_INTGRP == uSignal))){
-                        new SignalInfoTonePlayer(toneID).start();
-                    }
+                    new SignalInfoTonePlayer(toneID).start();
                 }
             }
         }
